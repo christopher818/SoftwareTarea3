@@ -124,7 +124,7 @@ class Test(unittest.TestCase):
     
     #Caso Esquina para la recarga de un numero muy grande cuando el saldo ya es muy grande
     def testRecargaConSaldo(self):
-        BE = BilleteraElectronica(5,"Isaac", "González", 12345678, 321)
+        BE = BilleteraElectronica(5,"Isaac", "Gonzalez", 12345678, 321)
         numerogrande = sys.float_info.max
         fechaRecarga = datetime(2016,5, 11, 6, 15)
         BE.recargar(numerogrande, fechaRecarga, "id")
