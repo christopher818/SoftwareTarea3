@@ -133,9 +133,9 @@ class Test(unittest.TestCase):
         self.assertEqual(BE.saldo(), (saldoInfinito), 'El saldo es infinito')
         
     #Caso Mali1cia para probar que la Billetera acepta caracteres especiales
-    '''def test1ClaseBeEspeciales(self):
-        
-    En python no reconoce estos caracteres especiales '''
+    def test1ClaseBeEspeciales(self):
+        BE = BilleteraElectronica(5,"ñññññññññññ", "Góḱfḱḱḱḱáásonzález", 12345678, 321)
+    ''' En python no reconoce estos caracteres especiales '''
         
     #Caso para un entero empezando en 0 (Malicioso)
     #def testEnteroEmpezando0(self):
