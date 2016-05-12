@@ -1,7 +1,9 @@
 '''
 Created on 11 de may. de 2016
 
-@author: Christopher Flores
+@author: Christopher Flores 10-10824
+         Isaac Gonzalez 11-10396
+         Kervyn Rivero 11-10874
 '''
 import unittest
 from BilleteraElectronica import *
@@ -122,11 +124,11 @@ class Test(unittest.TestCase):
     
     #Caso Esquina para la recarga de un numero muy grande cuando el saldo ya es muy grande
     def testRecargaConSaldo(self):
-        BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
-        BE.monto= sys.float_info.max # colocamos un saldo al usuario muy grande
+        BE = BilleteraElectronica(5,"Isaac", "González", 12345678, 321)
         numerogrande = sys.float_info.max
-        saldoInfinito = BE.monto+numerogrande
         fechaRecarga = datetime(2016,5, 11, 6, 15)
+        BE.recargar(numerogrande, fechaRecarga, "id")
+        saldoInfinito = BE.saldo() + numerogrande
         BE.recargar(numerogrande, fechaRecarga, "id")
         self.assertEqual(BE.saldo(), (saldoInfinito), 'El saldo es infinito')
         
@@ -136,11 +138,10 @@ class Test(unittest.TestCase):
     En python no reconoce estos caracteres especiales '''
         
     #Caso para un entero empezando en 0 (Malicioso)
-    def testEnteroEmpezando0(self):
-        BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
-        
-        '''En python los enteros no pueden empezar en 0, dando un error detectado
-    a nivel de lexer'''
+    #def testEnteroEmpezando0(self):
+    #    BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
+    #    '''En python los enteros no pueden empezar en 0, dando un error detectado
+    #a nivel de lexer'''
         
 
 if __name__ == "__main__":

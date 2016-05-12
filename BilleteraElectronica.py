@@ -33,11 +33,11 @@ class BilleteraElectronica():
         recargas = 0
         consumos = 0
 
-        #Cálculo de recargas
+        #Calculo de recargas
         for i in range(len(self.creditos)):
             recargas = recargas + self.creditos[i].monto
 
-        #Cálculo de consumos
+        #Calculo de consumos
         for i in range(len(self.debitos)):
             consumos = consumos + self.debitos[i].monto
 
