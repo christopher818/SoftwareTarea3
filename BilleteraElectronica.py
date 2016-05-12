@@ -35,4 +35,3 @@ class BilleteraElectronica:
             raise Exception("El monto para la recarga no puede ser negativo")
         self.monto = self.monto - monto
         self.debitos.append((monto,fecha,idEstablecimiento))
-

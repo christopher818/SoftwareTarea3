@@ -142,7 +142,6 @@ class Test(unittest.TestCase):
         '''En python los enteros no pueden empezar en 0, dando un error detectado
     a nivel de lexer'''
 
-                
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
