@@ -14,10 +14,7 @@ class Test(unittest.TestCase):
     def testClaseBE(self):
         BE = BilleteraElectronica(1,"Christopher","Flores",21534848,2970)
     
-    #Caso TDD para probar que la Billetera acepta caracteres especiales
-    def testClaseBeEspeciales(self):
-        pass
-    
+ 
     #Caso TDD para probrar que existe el metodo saldo
     def testSaldo(self):
         BE = BilleteraElectronica(3,"Christopher","Flores",21534848,1234)
@@ -78,7 +75,65 @@ class Test(unittest.TestCase):
         BE.recargar(100,fechaRecarga,"Restaurante12")
         self.assertRaises(Exception, BE.consumir,150,fechaConsumo,"Restaurante13",7891)
     
+    #Caso Frontera donde monto de recarga sea negativo
+    def testRecargaNegativa(self):
+        BE = BilleteraElectronica(11,"Christopher","Flores",21534848,8912)
+        fechaRecarga = datetime(2016,5, 11, 6, 15)
+        self.assertRaises(Exception, BE.recargar,-100,fechaRecarga,"Restaurante13")
+        
+    #Caso Frontera donde monto del consumo es mayor al saldo disponible
+    def testConsumirSinSaldo(self):
+        BE = BilleteraElectronica(12,"Christopher","Flores",21534848,9123)
+        fechaConsumo = datetime(2016,5, 11, 6, 15)
+        self.assertRaises(Exception, BE.consumir,150,fechaConsumo,"Restaurante14",7891)
     
+    #Caso Frontera donde el monto del consumo es negativo
+    def testConsumirNegativo(self):
+        BE = BilleteraElectronica(13,"Christopher","Flores",21534848,1234)
+        fechaConsumo = datetime(2016,5, 11, 6, 15)
+        self.assertRaises(Exception, BE.consumir,-150,fechaConsumo,"Restaurante13",7891)
+    
+    #Caso Frontera donde el monto de la recarga es CERO    
+    def testRecargaCero(self):
+        BE = BilleteraElectronica(11,"Christopher","Flores",21534848,8912)
+        fechaRecarga = datetime(2016,5, 11, 6, 15)
+        self.assertRaises(Exception, BE.recargar,0,fechaRecarga,"Restaurante13")
+    
+    #Caso Frontera donde el monto del consumo es CERO
+    def testConsumoCero(self):
+        BE = BilleteraElectronica(13,"Christopher","Flores",21534848,1234)
+        fechaConsumo = datetime(2016,5, 11, 6, 15)
+        self.assertRaises(Exception, BE.consumir,0,fechaConsumo,"Restaurante13",7891)
+    
+    #Caso Esquina para la recarga minima
+    def testMinRecargaSaldo(self):
+        BE = BilleteraElectronica(15,"Christopher", "Flores", 21534848, 4321)
+        fechaRecarga = datetime(2016,5, 11, 6, 15)
+        BE.recargar(0.000001, fechaRecarga, "id")
+        self.assertEqual(BE.saldo(), 0.000001 , "El saldo no es el correcto")
+    
+    #Caso Esquina para la recarga con un numero muy grande
+    def testMaxRecargaSaldo(self):
+        BE = BilleteraElectronica(15,"Christopher", "Flores", 21534848, 4321)
+        fechaRecarga = datetime(2016,5, 11, 6, 15)
+        BE.recargar(2**120    , fechaRecarga, "id")
+        self.assertEqual(BE.saldo(), 2**120 , "El saldo no es el correcto")
+    
+    #Caso Malicia para probar que la Billetera acepta caracteres especiales
+    '''def testClaseBeEspeciales(self):
+        
+    En python no reconoce estos caracteres '''
+        
+    #Caso para un entero empezando en 0 (Malicioso)
+    '''def testEnteroEmpezando0(self):
+        BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
+        
+        En python los enteros no pueden empezar en 0, dando un error detectado
+    a nivel de lexer'''
+        
+        
+        
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
