@@ -139,10 +139,9 @@ class Test(unittest.TestCase):
         
     #Caso para un entero empezando en 0 (Malicioso)
     #def testEnteroEmpezando0(self):
-    #    BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
     #    '''En python los enteros no pueden empezar en 0, dando un error detectado
     #a nivel de lexer'''
-        
+    #    BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
