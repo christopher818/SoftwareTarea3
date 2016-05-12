@@ -4,6 +4,9 @@ Created on 11 de may. de 2016
 @author: Christopher Flores 10-10824
 '''
 
+import sys
+from datetime import datetime
+
 class BilleteraElectronica:
 
     def __init__(self, identificador,nombre,apellido,ci,pin):
@@ -34,3 +37,10 @@ class BilleteraElectronica:
             raise Exception("El monto para la recarga no puede ser negativo")
         self.monto = self.monto - monto
         self.debitos.append((monto,fecha,idEstablecimiento))
+
+BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
+BE.monto= sys.float_info.max
+numerogrande = sys.float_info.max
+fechaRecarga = datetime(2016,5, 11, 6, 15)
+BE.recargar(numerogrande, fechaRecarga, "id")
+print(BE.saldo())

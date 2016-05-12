@@ -6,7 +6,7 @@ Created on 11 de may. de 2016
 import unittest
 from BilleteraElectronica import *
 from datetime import datetime 
-
+import sys
 
 class Test(unittest.TestCase):
 
@@ -116,19 +116,30 @@ class Test(unittest.TestCase):
     def testMaxRecargaSaldo(self):
         BE = BilleteraElectronica(15,"Christopher", "Flores", 21534848, 4321)
         fechaRecarga = datetime(2016,5, 11, 6, 15)
-        BE.recargar(2**120    , fechaRecarga, "id")
-        self.assertEqual(BE.saldo(), 2**120 , "El saldo no es el correcto")
+        numerogrande = sys.float_info.max
+        BE.recargar(numerogrande, fechaRecarga, "id")
+        self.assertEqual(BE.saldo(), numerogrande , "El saldo no es el correcto")
     
-    #Caso Malicia para probar que la Billetera acepta caracteres especiales
-    '''def testClaseBeEspeciales(self):
+    #Caso Esquina para la recarga de un numero muy grande cuando el saldo ya es muy grande
+    def testRecargaConSaldo(self):
+        BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
+        BE.monto= sys.float_info.max # colocamos un saldo al usuario muy grande
+        numerogrande = sys.float_info.max
+        saldoInfinito = BE.monto+numerogrande
+        fechaRecarga = datetime(2016,5, 11, 6, 15)
+        BE.recargar(numerogrande, fechaRecarga, "id")
+        self.assertEqual(BE.saldo(), (saldoInfinito), 'El saldo es infinito')
         
-    En python no reconoce estos caracteres '''
+    #Caso Mali1cia para probar que la Billetera acepta caracteres especiales
+    '''def test1ClaseBeEspeciales(self):
+        
+    En python no reconoce estos caracteres especiales '''
         
     #Caso para un entero empezando en 0 (Malicioso)
-    '''def testEnteroEmpezando0(self):
-        BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
+    def testEnteroEmpezando0(self):
+        BE = BilleteraElectronica(5,"Antonio", "Perez", 12345678, 0321)
         
-        En python los enteros no pueden empezar en 0, dando un error detectado
+        '''En python los enteros no pueden empezar en 0, dando un error detectado
     a nivel de lexer'''
         
         
